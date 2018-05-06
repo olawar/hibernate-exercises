@@ -96,7 +96,27 @@ public class Main {
 		newStudent.setName("Ania");
 		newStudent.setSurname("Adamowska");
 		newStudent.setPesel(84040613008L);
-		newStudents.add(newStudent);		
+		newStudents.add(newStudent);	
+		
+		Set<Student> newStudents2 = new HashSet<Student>();
+		Student newStudent2 = new Student();
+		newStudent2.setName("Antoni");
+		newStudent2.setSurname("Adamowski");
+		newStudent2.setPesel(84040613888L);
+		newStudents2.add(newStudent2);	
+		
+		Set<Teacher> newTeachers = new HashSet<Teacher>();
+		Teacher newTeacher = new Teacher();
+		newTeacher.setName("Mateusz");
+		newTeacher.setSurname("Janiak");
+		newTeacher.setTopic("polski");
+		newTeachers.add(newTeacher);
+		
+		Teacher newTeacher2 = new Teacher();
+		newTeacher2.setName("Jolanta");
+		newTeacher2.setSurname("Jakubik");
+		newTeacher2.setTopic("fizyka");
+		newTeachers.add(newTeacher2);
 		
 		Set<SchoolClass> newClasses = new HashSet<SchoolClass>();
 		SchoolClass newClass = new SchoolClass();
@@ -105,6 +125,24 @@ public class Main {
 		newClass.setStartYear(2016);	
 		newClass.setStudents(newStudents);
 		newClasses.add(newClass);
+		
+		SchoolClass newClass2 = new SchoolClass();
+		newClass2.setProfile("mat-fiz");
+		newClass2.setCurrentYear(1);
+		newClass2.setStartYear(2017);	
+		newClass2.setStudents(newStudents2);
+		newClasses.add(newClass2);
+		
+		// dodawanie nauczycieli z poziomu klasy
+		newClass.setTeachers(newTeachers);
+		
+		// dodawanie klas do nauczyciela
+		Teacher newTeacher3 = new Teacher();
+		newTeacher3.setName("Maksymilian");
+		newTeacher3.setSurname("Jarosz");
+		newTeacher3.setTopic("matematyka");
+		newTeacher3.setSchoolClasses(newClasses);
+		session.save(newTeacher3);
 		
 		School newSchool = new School();
 		newSchool.setName("UJ");
@@ -135,6 +173,12 @@ public class Main {
 				System.out.println(">STUDENTS: ");
 				for(Student st : c.getStudents()) {
 					System.out.println(st);
+				}
+				if(c.getTeachers() != null && c.getTeachers().size() > 0) {
+					System.out.println(">TEACHERS: ");
+					for(Teacher te : c.getTeachers()) {
+						System.out.println(te);
+					}
 				}
 			}
 		}

@@ -16,5 +16,13 @@
 			<one-to-many class="Student" />
 		</set>
 
+		<set name="teachers" table="teachers_schoolClasses" cascade="all" >
+            <key>
+                <column name="schoolClass_id" />
+            </key>
+            <many-to-many class="Teacher">
+                <column name="teacher_id" />
+            </many-to-many>
+        </set>
 	</class>
 </hibernate-mapping>
